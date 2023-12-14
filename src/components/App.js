@@ -10,6 +10,10 @@ import Process from "./Process";
 import FinishScreen from "./FinishScreen";
 import Timer from "./Timer";
 import Footer from "./Footer";
+// import questions from data folder
+import res from "../questions.json";
+console.log(res);
+const data = res["questions"];
 
 const initialState = {
   questions: [],
@@ -104,23 +108,25 @@ export default function App() {
     secondRemaining,
   } = state;
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        console.log('Fetching data...');
-        const response = await fetch('https://13.210.117.53/data/questions.json');
-        console.log('Response:', response);
-        const data = await response.json();
-        console.log('Data:', data);
-        dispatch({ type: "dataReceived", payload: data })
-      } catch (error) {
-        console.error('Error fetching data:', error);
-        dispatch({ type: "dataFailed" });
-      }
-    };
+  useEffect(() => {dispatch({type:"dataReceived", payload:data })}, []);
+
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       console.log('Fetching data...');
+  //       const response = await fetch('https://raw.githubusercontent.com/NeilHuang625/react_quiz/main/data/questions.json');
+  //       console.log('Response:', response);
+  //       const data = await response.json();
+  //       console.log('Data:', data);
+  //       dispatch({ type: "dataReceived", payload: data })
+  //     } catch (error) {
+  //       console.error('Error fetching data:', error);
+  //       dispatch({ type: "dataFailed" });
+  //     }
+  //   };
   
-    fetchData();
-  }, []);
+  //   fetchData();
+  // }, []);
   
   
   
