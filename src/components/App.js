@@ -103,14 +103,37 @@ export default function App() {
     highScore,
     secondRemaining,
   } = state;
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // console.log('Fetching data...');
+        const response = await fetch('https://raw.githubusercontent.com/NeilHuang625/react_quiz/main/data/questions.json');
+        // console.log('Response:', response);
+        const data = await response.json();
+        // console.log('Data:', data);
+        dispatch({ type: "dataReceived", payload: data })
+      } catch (error) {
+        // console.error('Error fetching data:', error);
+        dispatch({ type: "dataFailed" });
+      }
+    };
+  
+    fetchData();
+  }, []);
+  
+  
+  
+  // useEffect(() => {
+  //     fetch("https://raw.githubusercontent.com/NeilHuang625/react_quiz/main/data/questions.json")
+  //     .then((res) => res.json())
+  //     .then((data) => dispatch({ type: "dataReceived", payload: data }))
+  //     .catch((err) => dispatch({ type: "dataFailed" }));
+  // }, []);
+
   const numQuestion = questions.length;
   const maxPoints = questions.reduce((pre, cur) => pre + cur.points, 0);
-  useEffect(() => {
-    fetch("http://localhost:8000/questions")
-      .then((res) => res.json())
-      .then((data) => dispatch({ type: "dataReceived", payload: data }))
-      .catch((err) => dispatch({ type: "dataFailed" }));
-  }, []);
+
   return (
     <div className="app">
       <Header />
