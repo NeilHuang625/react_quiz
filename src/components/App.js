@@ -108,7 +108,7 @@ export default function App() {
     const fetchData = async () => {
       try {
         console.log('Fetching data...');
-        const response = await fetch('https://raw.githubusercontent.com/NeilHuang625/react_quiz/main/data/questions.json');
+        const response = await fetch('https://13.210.117.53/data/questions.json');
         console.log('Response:', response);
         const data = await response.json();
         console.log('Data:', data);
