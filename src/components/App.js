@@ -107,14 +107,14 @@ export default function App() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // console.log('Fetching data...');
+        console.log('Fetching data...');
         const response = await fetch('https://raw.githubusercontent.com/NeilHuang625/react_quiz/main/data/questions.json');
-        // console.log('Response:', response);
+        console.log('Response:', response);
         const data = await response.json();
-        // console.log('Data:', data);
+        console.log('Data:', data);
         dispatch({ type: "dataReceived", payload: data })
       } catch (error) {
-        // console.error('Error fetching data:', error);
+        console.error('Error fetching data:', error);
         dispatch({ type: "dataFailed" });
       }
     };
